@@ -13,8 +13,10 @@ e = ENVI(/HEADLESS)  ; Use the new ENVI/IDL code without GUI
 ;--------------------------------------------------------------------------
 ;;; RESAMPLE ;;;
 ; This section will resample AVIRIS image to 36 meters spatial resoultion to match MASTER spatial resolution
-
-
+input = 'D:\Imagery\AVIRIS\FL11\6 - Spectral Correction Files\FL011_f140416t01p00r15_refl_hpc18_v1_ResizePlusBorder_Regis_Cor'
+output = 'D:\Imagery\AVIRIS+MASTER\FL11\1 - Resized Imagery\FL011_f140416t01p00r15_refl_hpc18_v1_ResizePlusBorder_Regis_Cor_36'
+spatial_dim = 36
+PRINT, AVIRIS_resize(e, input, spatial_dim, output)
 
 ;--------------------------------------------------------------------------
 ;;; LAYER ;;;
@@ -24,3 +26,6 @@ e = ENVI(/HEADLESS)  ; Use the new ENVI/IDL code without GUI
 ;--------------------------------------------------------------------------
 ;;; MASK ;;;
 ; This section will mask out the image that does not fall in the AVIRIS flightline footprint
+; 
+
+END
