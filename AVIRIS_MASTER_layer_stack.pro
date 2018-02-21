@@ -39,6 +39,11 @@ FUNCTION AVIRIS_MASTER_layer_stack, e, a_img, m_img, output
   
   ; Save the result to ENVI raster format
   layerStack.Export, output, 'ENVI'
+  
+  ; Close Files
+  raster_a.Close
+  raster_m.Close
+  layerStack.Close
 
   RETURN, 'Completed Layering'
 END

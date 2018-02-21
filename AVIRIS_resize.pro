@@ -30,6 +30,9 @@ FUNCTION AVIRIS_resize, e, img, spatial_dim, output
   ; Run the task
   Task.Execute
   
+  ; Close Files
+  Raster.Close
+  
   RETURN, 'Completed resizing'
 
 END
