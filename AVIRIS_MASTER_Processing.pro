@@ -21,15 +21,18 @@ e = ENVI(/HEADLESS)  ; Use the new ENVI/IDL code without GUI
 ;--------------------------------------------------------------------------
 ;;; LAYER ;;;
 ; This section will layer AVIRIS image on top of the MASTER image
-inputA = 'D:\Imagery\AVIRIS+MASTER\FL11\1 - Resized Imagery\FL011_f140416t01p00r15_refl_hpc18_v1_ResizePlusBorder_Regis_Cor_36'
-inputM = 'D:\Imagery\MASTER\FL11\5 - Registered Files\FL011_MASTERL2_1463300_11_20140416_2130_2146_V02-emissivity&temp_cropped_ResizePlusBorder_Reg'
-output = 'D:\Imagery\AVIRIS+MASTER\FL11\2 - Layered Imagery\FL011_f140416_AVIRIS_MASTER'
-PRINT, AVIRIS_MASTER_layer_stack(e, inputA, inputM, output)
+;inputA = 'D:\Imagery\AVIRIS+MASTER\FL11\1 - Resized Imagery\FL011_f140416t01p00r15_refl_hpc18_v1_ResizePlusBorder_Regis_Cor_36'
+;inputM = 'D:\Imagery\MASTER\FL11\5 - Registered Files\FL011_MASTERL2_1463300_11_20140416_2130_2146_V02-emissivity&temp_cropped_ResizePlusBorder_Reg'
+;output = 'D:\Imagery\AVIRIS+MASTER\FL11\2 - Layered Imagery\FL011_f140416_AVIRIS_MASTER'
+;PRINT, AVIRIS_MASTER_layer_stack(e, inputA, inputM, output)
 
 
 ;--------------------------------------------------------------------------
 ;;; MASK ;;;
 ; This section will mask out the image that does not fall in the AVIRIS flightline footprint
-; 
+input = 'D:\Imagery\AVIRIS+MASTER\FL11\2 - Layered Imagery\FL011_f140416_AVIRIS_MASTER'
+outputMask = 'D:\Imagery\AVIRIS+MASTER\FL11\3 - Mask File\FL011_f140416_AVIRIS_MASTER_mask'
+outputImg = 'D:\Imagery\AVIRIS+MASTER\FL11\4 - Corrected Imagery\FL011_f140416_AVIRIS_MASTER_Cor'
+PRINT, AVIRIS_MASTER_mask(e, input, outputMask, outputImg)
 
 END
