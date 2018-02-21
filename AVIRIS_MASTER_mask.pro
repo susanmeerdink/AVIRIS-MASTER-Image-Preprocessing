@@ -1,4 +1,4 @@
-PRO aviris_create_apply_mask_batch
+PRO AVIRIS_MASTER_mask
 ;This code utlizes the masking_with_tiles function to mask out the margins.
 ;This code uses the function to create and apply a mask for AVIRIS imagery,
 ;specifically the HyspIRI simulated dataset

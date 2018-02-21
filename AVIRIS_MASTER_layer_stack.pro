@@ -1,4 +1,4 @@
-FUNCTION layer_stack, a_img, m_img
+FUNCTION AVIRIS_MASTER_layer_stack, a_img, m_img
 ; This code stacks the AVIRIS (224 bands) with MASTER (emissivity and surface temperature band) files.
 ; It does not use the ENVI layer function because that function projects the new image and rotates it
 ; Susan Meerdink
