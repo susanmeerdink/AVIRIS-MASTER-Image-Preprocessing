@@ -33,6 +33,6 @@ FUNCTION AVIRIS_resize, e, img, spatial_dim, output
   ; Close Files
   Raster.Close
   
-  RETURN, 'Completed resizing'
+  RETURN, 'Completed Resizing'
 
 END
