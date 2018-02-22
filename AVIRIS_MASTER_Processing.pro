@@ -12,8 +12,8 @@ master_folder = '\5 - Registered Files\'
 output_path = 'D:\Imagery\AVIRIS+MASTER\'
 ;fl_list = ['FL02', 'FL03', 'FL04', 'FL05', 'FL06', 'FL07', 'FL08', 'FL09', 'FL10', 'FL11']
 ;date_list = ['130411', '130606', '131125', '140416', '140606', '140829']
-fl_list = ['FL03']
-date_list = ['130411']
+fl_list = ['FL07']
+date_list =  ['140604']
 
 ;;; SETTING UP ENVI/IDL ENVIRONMENT ;;;
 COMPILE_OPT IDL2
@@ -31,7 +31,7 @@ foreach fl, fl_list do begin
     master_list = file_search(master_path + fl + master_folder + '*' + date + '*', /WINDOWS_SHORT_NAMES) ;Get list of master files for this flightline & date
     
     ; Only process flightline and date if there is an image for BOTH AVIRIS and MASTER
-    if size(aviris_list, /N_ELEMENTS) GT 0 AND size(master_list, /N_ELEMENTS) GT 0 then begin
+    if size(aviris_list, /N_ELEMENTS) GT 1 AND size(master_list, /N_ELEMENTS) GT 1 then begin
       
       ;--------------------------------------------------------------------------
       ;;; RESAMPLE ;;;
