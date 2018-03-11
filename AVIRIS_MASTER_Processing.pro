@@ -1,19 +1,24 @@
 PRO AVIRIS_MASTER_Processing
-; This code 
+; This code reads in AVIRIS and MASTER imagery to create a layered product.
+; REQUIRES ENVI 5.3 with Service Pack 2 and higher!
+; Imagery goes through three steps:
+; 1) Resizes aviris imagery to 36 meter spatial resolution to match master imagery
+; 2) Layers the aviris and master imagery on top of each other
+; 3) Masks the master imagery so only imagery that falls on top of AVIRIS imagery is included.
 ; Susan Meerdink
 ; 2/20/2018
 ;--------------------------------------------------------------------------
 
 ;;; INPUTS ;;;
-aviris_path = 'D:\Imagery\AVIRIS\'
+aviris_path = 'I:\AVIRIS\'
 aviris_folder = '\6 - Spectral Correction Files\'
-master_path = 'D:\Imagery\MASTER\'
+master_path = 'I:\MASTER\'
 master_folder = '\5 - Registered Files\'
-output_path = 'D:\Imagery\AVIRIS+MASTER\'
+output_path = 'I:\AVIRIS+MASTER\'
 ;fl_list = ['FL02', 'FL03', 'FL04', 'FL05', 'FL06', 'FL07', 'FL08', 'FL09', 'FL10', 'FL11']
-;date_list = ['130411', '130606', '131125', '140416', '140606', '140829']
-fl_list = ['FL07']
-date_list =  ['140604']
+;date_list = ['130411', '130606', '131125', '140416', '140606', '140829', '150416', '150602', '150824']
+fl_list = ['FL02', 'FL05', 'FL09']
+date_list =  ['150416']
 
 ;;; SETTING UP ENVI/IDL ENVIRONMENT ;;;
 COMPILE_OPT IDL2
@@ -39,21 +44,27 @@ foreach fl, fl_list do begin
       input = aviris_list[0]
       outputResample = output_path + fl + '\1 - Resized Imagery\' + file_basename(aviris_list[0]) + '_36'
       spatial_dim = 36
-      PRINT, AVIRIS_resize(e, input, spatial_dim, outputResample)
+      if file_test(outputResample) EQ 0 then begin
+        PRINT, AVIRIS_resize(e, input, spatial_dim, outputResample)
+      endif
   
       ;--------------------------------------------------------------------------
       ;;; LAYER ;;;
       ; This section will layer AVIRIS image on top of the MASTER image
       inputM = master_list[0]
       outputLayer = output_path + fl + '\2 - Layered Imagery\' + fl + '_' + date + '_AVIRIS_MASTER'
-      PRINT, AVIRIS_MASTER_layer_stack(e, outputResample, inputM, outputLayer)
+      if file_test(outputLayer) EQ 0 then begin
+        PRINT, AVIRIS_MASTER_layer_stack(e, outputResample, inputM, outputLayer)
+      endif
   
       ;--------------------------------------------------------------------------
       ;;; MASK ;;;
       ; This section will mask out the image that does not fall in the AVIRIS flightline footprint
       outputMask = output_path + fl + '\3 - Mask File\' + file_basename(outputLayer) + '_mask'
       outputImg = output_path + fl + '\4 - Corrected Imagery\' + file_basename(outputLayer) + '_Cor'
-      PRINT, AVIRIS_MASTER_mask(e, outputLayer, outputMask, outputImg)      
+      if file_test(outputImg) EQ 0 then begin
+        PRINT, AVIRIS_MASTER_mask(e, outputLayer, outputMask, outputImg)
+      endif      
       
       print, 'Completed ' + fl + ' ' + date
     endif
