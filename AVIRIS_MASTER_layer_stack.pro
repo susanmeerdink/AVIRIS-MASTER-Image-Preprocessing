@@ -1,4 +1,4 @@
-FUNCTION AVIRIS_MASTER_layer_stack, e, a_img, m_img, output
+FUNCTION AVIRIS_MASTER_layer_stack, e, a_img, m_img, t_img, output
 ; This code stacks the AVIRIS (224 bands) with MASTER (emissivity and surface temperature band) files.
 ; It does not use the ENVI layer function because that function projects the new image and rotates it
 ; Susan Meerdink
@@ -15,6 +15,7 @@ FUNCTION AVIRIS_MASTER_layer_stack, e, a_img, m_img, output
   ; Open an input files 
   raster_a = e.OpenRaster(a_img)
   raster_m = e.OpenRaster(m_img)
+  raster_t = e.OpenRaster(t_img)
   
   ; Get the spatial reference of the master raster
   spatialRef = raster_m.SPATIALREF
@@ -35,7 +36,7 @@ FUNCTION AVIRIS_MASTER_layer_stack, e, a_img, m_img, output
     NROWS = nRows) ; Specify the number of rows in the grid
   
   ; Create a layer stack: http://www.harrisgeospatial.com/docs/envilayerstackraster.html
-  layerStack = ENVILayerStackRaster([raster_a, raster_m], Grid)  
+  layerStack = ENVILayerStackRaster([raster_a, raster_m, raster_t], Grid)  
   
   ; Save the result to ENVI raster format
   layerStack.Export, output, 'ENVI'
