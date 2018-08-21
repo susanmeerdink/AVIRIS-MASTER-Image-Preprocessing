@@ -17,14 +17,12 @@ FUNCTION AVIRIS_resize, e, img, spatial_dim, output
   pixel_size = spatial.PIXEL_SIZE
   pixel_scale = spatial_dim/pixel_size[0]
   
-  ; Only use one band the UTC band
-  rasterIn = Raster.Subset(BANDS=9)
   
   ; Get the task from the catalog of ENVITasks
   Task = ENVITask('PixelScaleResampleRaster')  ; http://www.harrisgeospatial.com/docs/envipixelscaleresamplerastertask.html
   
   ; Define inputs
-  Task.INPUT_RASTER = rasterIn
+  Task.INPUT_RASTER = Raster
   Task.PIXEL_SCALE = [pixel_scale, pixel_scale]
   
   ; Define outputs
