@@ -10,7 +10,7 @@ PRO AVIRIS_Time_Processing
   ;fl_list = ['FL02', 'FL03', 'FL04', 'FL05', 'FL06', 'FL07', 'FL08', 'FL09', 'FL10', 'FL11']
   ;date_list = ['130411', '130606', '131125', '140416', '140606', '140829', '150416', '150602', '150824']
   fl_list = ['FL03']
-  date_list =  ['130411']
+  date_list =  [ '150416', '150602', '150824' ]
 
   ;;; SETTING UP ENVI/IDL ENVIRONMENT ;;;
   COMPILE_OPT IDL2
@@ -40,7 +40,7 @@ PRO AVIRIS_Time_Processing
         ; This section will resample AVIRIS image to 36 meters spatial resoultion to match MASTER spatial resolution
         outputResample = output_path + fl + '\2 - Time Files\' + fl + '_' + date + '_UTC_36'
         spatial_dim = 36
-        PRINT, AVIRIS_resize(e, outputResize, spatial_dim, outputResample)
+        PRINT, time_resize(e, outputResize, spatial_dim, outputResample)
 
         print, 'Completed ' + fl + ' ' + date
       endif

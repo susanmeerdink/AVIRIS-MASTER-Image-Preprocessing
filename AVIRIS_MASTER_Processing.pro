@@ -12,8 +12,8 @@ master_folder = '\5 - Registered Files\'
 output_path = 'D:\Imagery\AVIRIS+MASTER\'
 ;fl_list = ['FL02', 'FL03', 'FL04', 'FL05', 'FL06', 'FL07', 'FL08', 'FL09', 'FL10', 'FL11']
 ;date_list = ['130411', '130606', '131125', '140416', '140606', '140829', '150416', '150602', '150824']
-fl_list = ['FL04']
-date_list =  ['130606', '131125', '140416', '140606', '140829']
+fl_list = ['FL03']
+date_list =  ['150602']
 
 ;;; SETTING UP ENVI/IDL ENVIRONMENT ;;;
 COMPILE_OPT IDL2
@@ -39,6 +39,7 @@ foreach fl, fl_list do begin
       ;;; RESAMPLE ;;;
       ; This section will resample AVIRIS image to 36 meters spatial resoultion to match MASTER spatial resolution
 ;      input = aviris_list[0]
+;      print, input
 ;      outputResample = output_path + fl + '\1 - Resized Imagery\' + file_basename(aviris_list[0]) + '_36'
 ;      spatial_dim = 36
 ;      PRINT, AVIRIS_resize(e, input, spatial_dim, outputResample)
@@ -49,7 +50,7 @@ foreach fl, fl_list do begin
       inputM = master_list[0]
       outputLayer = output_path + fl + '\3 - Layered Imagery\' + fl + '_' + date + '_AVIRIS_MASTER'
       PRINT, AVIRIS_MASTER_layer_stack(e, aviris_list[0], inputM, time_list[0], outputLayer)
-;      PRINT, AVIRIS_MASTER_layer_stack(e, outputResample, inputM, outputLayer)
+      ;PRINT, AVIRIS_MASTER_layer_stack(e, outputResample, inputM, time_list[0], outputLayer)
   
       ;--------------------------------------------------------------------------
       ;;; MASK ;;;
