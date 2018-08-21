@@ -2,7 +2,7 @@ FUNCTION AVIRIS_MASTER_mask, e, input, outputMask, outputImage
 ; This code reads in image that has both AVIRIS and MASTER imagery layered and will mask out areas
 ; where the MASTER imagery does not overlap with AVIRIS imagery.
 ; This code also update the metadata specifically band names, wavelengths, and bbl.
-; Based on 224 bands of AVIRIS, 5 MASTER Emissivity Bands, and 1 Temperature Band
+; Based on 224 bands of AVIRIS, 5 MASTER Emissivity Bands, 1 Temperature Band, and 1 UTC Bands
 ; Susan Meerdink
 ; 2/21/2018
 ; INPUTS:
